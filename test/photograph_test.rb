@@ -3,7 +3,7 @@ require 'minitest/pride'
 require 'minitest/autorun'
 require 'pry'
 require './lib/photograph'
-require './lib/file_io'
+
 
 class PhotographTest < MiniTest::Test
 
