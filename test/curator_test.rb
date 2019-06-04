@@ -22,6 +22,18 @@ class CuratorTest < MiniTest::Test
       artist_id: "2",
       year: "1941"
     }
+    @photo_3 = {
+      id: "3",
+      name: "Identical Twins, Roselle, New Jersey",
+      artist_id: "3",
+      year: "1967"
+    }
+    @photo_4 = {
+      id: "4",
+      name: "Child with Toy Hand Grenade in Central Park",
+      artist_id: "3",
+      year: "1962"
+    }
     @artist_1 = {
       id: "1",
       name: "Henri Cartier-Bresson",
@@ -34,6 +46,13 @@ class CuratorTest < MiniTest::Test
       name: "Ansel Adams",
       born: "1902",
       died: "1984",
+      country: "United States"
+    }
+    @artist_3 = {
+      id: "3",
+      name: "Diane Arbus",
+      born: "1923",
+      died: "1971",
       country: "United States"
     }
   end
@@ -67,5 +86,20 @@ class CuratorTest < MiniTest::Test
     assert_equal "Henri Cartier-Bresson", @curator.artists.first.name
     assert_equal bresson.first, @curator.find_artist_by_id("1")
   end
+
+  def test_find_photographs_by_artist
+    @curator.add_photograph(@photo_1)
+    @curator.add_photograph(@photo_2)
+    arbus_1 = @curator.add_photograph(@photo_3)
+    arbus_2 = @curator.add_photograph(@photo_4)
+    @curator.add_artist(@artist_1)
+    @curator.add_artist(@artist_2)
+    @curator.add_artist(@artist_3)
+
+    diane_arbus = @curator.find_artist_by_id("3")
+    assert_equal [arbus_1[2], arbus_2[3]], @curator.find_photographs_by_artist(diane_arbus)
+  end
+
+  
 
 end
