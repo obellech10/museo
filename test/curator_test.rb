@@ -115,6 +115,16 @@ class CuratorTest < MiniTest::Test
     assert diane_arbus == @curator.artists_with_multiple_photographs.first
   end
 
-  
+  def test_find_photos_taken_by_artists_from
+   @curator.add_photograph(@photo_1)
+   adams_1 = @curator.add_photograph(@photo_2)
+   arbus_1 = @curator.add_photograph(@photo_3)
+   arbus_2 = @curator.add_photograph(@photo_4)
+   @curator.add_artist(@artist_1)
+   @curator.add_artist(@artist_2)
+   @curator.add_artist(@artist_3)
+
+  assert_equal [adams_1, arbus_1, arbus_2], @curator.photographs_taken_by_artist_from("United States")
+  end
 
 end
